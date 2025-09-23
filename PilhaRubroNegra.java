@@ -95,7 +95,7 @@ public class PilhaRubroNegra extends PilhaArray {
 
 
         if (tamanhoTotal < capacidade / 3) {
-            int novaC''apacidade = capacidade / 2;
+            int novaCapacidade = capacidade / 2;
             redimensionarPilha(capacidade/2, tamV, tamP);
             verificaTamanhoPilha();
         
