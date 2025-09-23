@@ -6,9 +6,11 @@ public class TesteMain {
         
         try {
             System.out.println("=== TESTANDO PILHA VERMELHA ===");
+            
             pilha.pushVermelho("Vermelho 1");
             
             System.out.println(pilha.sizeVermelho());
+            
             
            
             System.out.println("=== TESTANDO PILHA PRETA ===");
