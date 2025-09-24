@@ -16,7 +16,6 @@ public class PilhaRubroNegra extends PilhaArray {
             verificaTamanhoPilha();
         }
         a[++t] = o;
-        verificaTamanhoPilha();
     }
 
     public boolean isEmptyVermelho() {
@@ -52,7 +51,6 @@ public class PilhaRubroNegra extends PilhaArray {
             verificaTamanhoPilha();
         }
         a[--tPreto] = o;
-        verificaTamanhoPilha();
     }
 
     public boolean isEmptyPreto() {
@@ -83,24 +81,20 @@ public class PilhaRubroNegra extends PilhaArray {
     
 
     protected void verificaTamanhoPilha() {
-        int tamV = sizeVermelho();
-        int tamP = sizePreto();
-        int tamanhoTotal = tamV + tamP;
-        
-        if (tamanhoTotal >= capacidade) { 
-            redimensionarPilha(capacidade * 2, tamV, tamP);
-            return;
-            
-        }
-
-
-        if (tamanhoTotal < capacidade / 3) {
-            int novaCapacidade = capacidade / 2;
-            redimensionarPilha(capacidade/2, tamV, tamP);
-            verificaTamanhoPilha();
-        
+    int tamV = sizeVermelho();
+    int tamP = sizePreto();
+    int tamanhoTotal = tamV + tamP;
+    
+    if (tamanhoTotal >= capacidade) { 
+        // Aumenta o array se estiver cheio
+        redimensionarPilha(capacidade * 2, tamV, tamP);
+        return;
     }
-}
+
+    if (tamanhoTotal < capacidade / 3) {
+        redimensionarPilha(capacidade / 2, tamV, tamP);
+    }
+} 
     private void redimensionarPilha(int novaCapacidade, int tamV, int tamP) {
         Object[] b = new Object[novaCapacidade];
 
