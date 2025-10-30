@@ -13,7 +13,7 @@ public class PilhaRubroNegra extends PilhaArray {
     
     public void pushVermelho(Object o) {
         if (t + 1 >= tPreto) {
-            verificaTamanhoPilha();
+            duplicaTamanho();
         }
         a[++t] = o;
     }
@@ -32,7 +32,7 @@ public class PilhaRubroNegra extends PilhaArray {
         Object r = a[t];
         a[t] = null;
         t--;
-        verificaTamanhoPilha();
+        reduzTamanho();
         return r;
     }
 
@@ -48,7 +48,7 @@ public class PilhaRubroNegra extends PilhaArray {
 
     public void pushPreto(Object o) {
         if (tPreto - 1 <= t) {
-            verificaTamanhoPilha();
+            duplicaTamanho();
         }
         a[--tPreto] = o;
     }
@@ -69,7 +69,7 @@ public class PilhaRubroNegra extends PilhaArray {
         Object rPreto = a[tPreto];
         a[tPreto] = null;
         tPreto++;
-        verificaTamanhoPilha();
+        reduzTamanho();
         return rPreto;
     }
 
@@ -80,35 +80,38 @@ public class PilhaRubroNegra extends PilhaArray {
     }
     
 
-    protected void verificaTamanhoPilha() {
-    int tamV = sizeVermelho();
-    int tamP = sizePreto();
-    int tamanhoTotal = tamV + tamP;
-    
-    if (tamanhoTotal >= capacidade) { 
-        // Aumenta o array se estiver cheio
-        redimensionarPilha(capacidade * 2, tamV, tamP);
-        return;
+   
+    protected void reduzTamanho(){
+        int tamV = sizeVermelho();
+        int tamP = sizePreto();
+        int tamanhoTotal = tamV + tamP;
+        if (tamanhoTotal < capacidade / 3) {
+            redimensionarPilha(capacidade / 2, tamV, tamP);
+         }
+
     }
 
-    if (tamanhoTotal < capacidade / 3) {
-        redimensionarPilha(capacidade / 2, tamV, tamP);
-    }
-} 
+    protected void  duplicaTamanho(){
+        int tamV = sizeVermelho();
+        int tamP = sizePreto();
+        redimensionarPilha(capacidade * 2, tamV, tamP);
+        }
+
+    
     private void redimensionarPilha(int novaCapacidade, int tamV, int tamP) {
         Object[] b = new Object[novaCapacidade];
 
-        // Copia os elementos da pilha vermelha
+        // copia os elementos da pilha vermelha
          for (int i = 0; i < tamV; i++) {
              b[i] = a[i];
          }
 
-        // Copia os elementos da pilha preta
+        // copia os elementos da pilha preta
          for (int j=0; j < tamP; j++) {
              b[novaCapacidade - j - 1] = a[capacidade - j - 1];
          }
 
-        // Atualiza o topo da pilha preta
+        // atualiza o topo da pilha preta
          tPreto = novaCapacidade - tamP;
 
          a = b;
