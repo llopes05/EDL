@@ -38,21 +38,21 @@ public class VetorArray {
         return removido;
     }
 
-    public void insertAtRank(int r, Object o) {
-        if (r < 0 || r > size) {
-            throw new IndexOutOfBoundsException("rank inválido");
-        }
-        
-        if (size == capacidade) {
-            redimensionar(capacidade * 2);
-        }
-        
-        for (int i = size; i > r; i--) {
-            array[i] = array[i - 1];
-        }
-        
-        array[r] = o;
-        size++;
+     public void insertAtRank(int r, Object o) {
+         if (r < 0 || r > size) {
+             throw new IndexOutOfBoundsException("rank inválido");
+         }
+      
+         if (size == capacidade) {
+             redimensionar(capacidade * 2);
+         }
+      
+         for (int i = size; i > r; i--) {
+             array[i] = array[i - 1];
+         }
+      
+         array[r] = o;
+         size++;
     }
 
     
@@ -103,4 +103,17 @@ public class VetorArray {
         }
         System.out.println("]");
     }
+
+    
+
+
+        
+    }
+
+
+        
+
+    
+
+    
 }
